@@ -1,8 +1,11 @@
 package cn.lovingliu.product.service;
 
 import cn.lovingliu.product.dataobject.ProductInfo;
+import cn.lovingliu.product.dto.CartDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+
+import java.util.List;
 
 /**
  * @Author：LovingLiu
@@ -11,4 +14,16 @@ import org.springframework.data.domain.Pageable;
  */
 public interface ProductService {
     Page<ProductInfo> findUpAll(Integer productStatus, Pageable pageable);
+    /**
+     * @Desc 订单服务调用
+     * @Author LovingLiu
+    */
+    List<ProductInfo> findList(List<String> productIdList);
+    /**
+     * @Desc 扣库存
+     * @Author LovingLiu
+    */
+    void decreaseStock(List<CartDTO> cartDTOList);
+
+    ProductInfo findById(String id);
 }

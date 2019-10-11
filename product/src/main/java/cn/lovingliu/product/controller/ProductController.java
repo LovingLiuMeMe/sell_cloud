@@ -4,6 +4,7 @@ import cn.lovingliu.product.common.ServerResponse;
 import cn.lovingliu.product.convert.ProductInfoToProductInfoVO;
 import cn.lovingliu.product.dataobject.ProductCategory;
 import cn.lovingliu.product.dataobject.ProductInfo;
+import cn.lovingliu.product.dto.CartDTO;
 import cn.lovingliu.product.enums.CommonStatusEnum;
 import cn.lovingliu.product.service.ProductCategoryService;
 import cn.lovingliu.product.service.ProductService;
@@ -14,10 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -68,5 +66,25 @@ public class ProductController {
             productCategoryVOList.add(productCategoryVO);
         }
         return ServerResponse.createBySuccess("成功",productCategoryVOList);
+    }
+
+    /**
+     * @Desc 获取商品列表(cloud 给订单服务使用的)
+     * @Author LovingLiu
+    */
+    @PostMapping("/listForOrder")
+    public List<ProductInfo> listForOrder(@RequestBody List<String> productIdList){
+        return productService.findList(productIdList);
+    }
+
+    @PostMapping("/decreaseStock")
+    public String decreaseStock(@RequestBody List<CartDTO> cartDTOList){
+        productService.decreaseStock(cartDTOList);
+        return "success";
+    }
+
+    @GetMapping("/info/#{id}")
+    public ProductInfo findById(@PathVariable("id") String id){
+        return productService.findById(id);
     }
 }

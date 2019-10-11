@@ -1,21 +1,16 @@
-package cn.lovingliu.order;
-
-import cn.lovingliu.order.client.ProductClient;
-import cn.lovingliu.order.dto.CartDTO;
-import com.google.common.collect.Lists;
-import lombok.extern.slf4j.Slf4j;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.cloud.client.ServiceInstance;
-import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
-import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.web.client.RestTemplate;
-
-@RunWith(SpringRunner.class)
-@SpringBootTest
-@Slf4j
+### 服务的调用两种方式
+1.RestTemplate  
+```java
+@Component
+public class RestTemplateConfig {
+    @Bean
+    @LoadBalanced
+    public RestTemplate restTemplate(){
+        return new RestTemplate();
+    }
+}
+```
+```java
 public class OrderApplicationTests {
 
     @Autowired
@@ -42,20 +37,25 @@ public class OrderApplicationTests {
         log.error("商品服务的远程调用,方式2 {}",json);
     }
 
-
-    @Autowired
-    private ProductClient productClient;
-
-    @Test
-    public void testFeign(){
-        String resultJson = productClient.productList();
-        log.info("resultJson = {}",resultJson);
-
-        String resultMsg = productClient.decreaseStock(Lists.newArrayList(
-                new CartDTO("1570451410455390493",12),
-                new CartDTO("test",12)
-        ));
-        log.info(resultMsg);
-    }
-
 }
+```
+2.Feign  
+Spring Cloud Feign是一套基于Netflix Feign实现的声明式服务调用客户端。
+
+
+#### 2.Spring Cloud Ribbon
+spring Cloud Ribbon是基于Netflix Ribbon实现的一套客户端负载均衡的工具。它是一个基于HTTP和TCP的客户端负载均衡器。它可以通过在客户端中配置ribbonServerList来设置服务端列表去轮询访问以达到均衡负载的作用。
+```
+who is 负载均衡
+若 product 在eureka中注册了 两个,当order中调用谁呢?
+选择的过程 就是一个负载均衡的过程
+```
+Ribbon 实现负载均衡 主要又3点:  
+1.服务发现  
+2.服务选择规则  
+3.服务监听  
+
+主要组件: ServerList(获得服务列表)->ServerListFilter(过滤一部分服务)->IRule(选择服务)  
+ServerList    
+IRule  
+ServerListFilter  

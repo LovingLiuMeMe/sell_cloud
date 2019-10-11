@@ -7,6 +7,8 @@ package cn.lovingliu.product.enums;
  */
 public enum CommonStatusEnum implements CodeEnum{
     UP(0,"上架"),
+    PRODUCT_NOT_EXIT(201,"商品不存在"),
+    PRODUCT_STOCK_ERROR(202,"商品库存错误"),
     SUCCESS(200,"成功"),
     ERROR(400,"失败"),
     DOWN(1,"下架");

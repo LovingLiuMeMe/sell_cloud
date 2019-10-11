@@ -6,6 +6,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * @Author：LovingLiu
  * @Description: ProductInfoRepository
@@ -14,4 +16,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ProductInfoRepository extends JpaRepository<ProductInfo,String> {
     Page<ProductInfo> findByProductStatus(Integer productStatus, Pageable pageable);
+    List<ProductInfo> findByProductIdIn(List<String> productIdList);
 }

@@ -6,6 +6,7 @@ package cn.lovingliu.order.enums;
  * @Date：Created in 2019-10-11
  */
 public enum CommonStatusEnum implements CodeEnum {
+    UP(0,"上架"),
     PARAMS_ERROR(100,"参数错误"),
     CART_EMPTY(101,"购物车为空"),
     SUCCESS(200,"成功"),

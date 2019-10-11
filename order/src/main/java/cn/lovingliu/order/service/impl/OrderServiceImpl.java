@@ -1,7 +1,9 @@
 package cn.lovingliu.order.service.impl;
 
+import cn.lovingliu.order.client.ProductClient;
 import cn.lovingliu.order.dataobject.OrderDetail;
 import cn.lovingliu.order.dataobject.OrderMaster;
+import cn.lovingliu.order.dataobject.ProductInfo;
 import cn.lovingliu.order.dto.CartDTO;
 import cn.lovingliu.order.dto.OrderDTO;
 import cn.lovingliu.order.enums.CommonStatusEnum;
@@ -19,9 +21,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -35,6 +35,8 @@ public class OrderServiceImpl implements OrderService {
     private OrderDetailRepository orderDetailRepository;
     @Autowired
     private OrderMasterRepository orderMasterRepository;
+    @Autowired
+    private ProductClient productClient;
 
     @Override
     @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.READ_COMMITTED)
@@ -44,15 +46,15 @@ public class OrderServiceImpl implements OrderService {
         String orderId = KeyUtil.getUniqueKey();
 
         for (OrderDetail orderDetail : orderDTO.getOrderDetailList()) {
-            //todo 1.查询商品详情(调用商品的服务)
+            // 1.查询商品详情(调用商品的服务)
 
-            Map<String,Object> productInfo = new HashMap<>();
+            ProductInfo productInfo = productClient.findById(orderDetail.getProductId());
 
             if (productInfo == null) {
                 throw new OrderException(CommonStatusEnum.ERROR);
             }
 
-            //todo 2.计算该订单的所有总价
+            // 2.计算该订单的所有总价
             orderAllAmount = BigDecimalUtil.add(
                     orderAllAmount.doubleValue(),
                     BigDecimalUtil.mul(
@@ -86,7 +88,7 @@ public class OrderServiceImpl implements OrderService {
 
         ).collect(Collectors.toList());
 
-        productService.decreaseStock(cartDTOList);
+        productClient.decreaseStock(cartDTOList);
 
 
         return orderDTO;
