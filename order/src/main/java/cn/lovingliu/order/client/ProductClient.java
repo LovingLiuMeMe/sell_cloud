@@ -27,6 +27,6 @@ public interface ProductClient {
     @PostMapping("product/decreaseStock")
     String decreaseStock(@RequestBody List<CartDTO> cartDTOList);
 
-    @GetMapping("/info/#{id}")
+    @GetMapping("product/info/{id}")
     ProductInfo findById(@PathVariable("id") String id);
 }

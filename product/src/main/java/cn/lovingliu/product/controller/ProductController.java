@@ -83,7 +83,7 @@ public class ProductController {
         return "success";
     }
 
-    @GetMapping("/info/#{id}")
+    @GetMapping("/info/{id}")
     public ProductInfo findById(@PathVariable("id") String id){
         return productService.findById(id);
     }
