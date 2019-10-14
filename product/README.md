@@ -79,4 +79,5 @@ public interface ProductClient {
 2.自己维护自己的入参类（保证服务的完整性）
 
 ### jar包打包
+在product服务中,自己维护了`ProductInfoOutput`和`DecreaseStockInput`两个参数类
 mvn -Dmaven.test.skip=true -U clean install 

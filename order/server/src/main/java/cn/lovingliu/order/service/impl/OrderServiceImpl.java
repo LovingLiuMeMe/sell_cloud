@@ -1,10 +1,7 @@
 package cn.lovingliu.order.service.impl;
 
-import cn.lovingliu.order.client.ProductClient;
 import cn.lovingliu.order.dataobject.OrderDetail;
 import cn.lovingliu.order.dataobject.OrderMaster;
-import cn.lovingliu.order.dataobject.ProductInfo;
-import cn.lovingliu.order.dto.CartDTO;
 import cn.lovingliu.order.dto.OrderDTO;
 import cn.lovingliu.order.enums.CommonStatusEnum;
 import cn.lovingliu.order.exception.OrderException;
@@ -13,6 +10,9 @@ import cn.lovingliu.order.repositroy.OrderMasterRepository;
 import cn.lovingliu.order.service.OrderService;
 import cn.lovingliu.order.util.BigDecimalUtil;
 import cn.lovingliu.order.util.KeyUtil;
+import cn.lovingliu.product.client.ProductClient;
+import cn.lovingliu.product.common.DecreaseStockInput;
+import cn.lovingliu.product.common.ProductInfoOutput;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,7 +23,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
-
 /**
  * @Author：LovingLiu
  * @Description:
@@ -35,6 +34,7 @@ public class OrderServiceImpl implements OrderService {
     private OrderDetailRepository orderDetailRepository;
     @Autowired
     private OrderMasterRepository orderMasterRepository;
+
     @Autowired
     private ProductClient productClient;
 
@@ -48,9 +48,9 @@ public class OrderServiceImpl implements OrderService {
         for (OrderDetail orderDetail : orderDTO.getOrderDetailList()) {
             // 1.查询商品详情(调用商品的服务)
 
-            ProductInfo productInfo = productClient.findById(orderDetail.getProductId());
+             ProductInfoOutput productInfoOutput = productClient.findById(orderDetail.getProductId());
 
-            if (productInfo == null) {
+            if (productInfoOutput == null) {
                 throw new OrderException(CommonStatusEnum.ERROR);
             }
 
@@ -58,13 +58,13 @@ public class OrderServiceImpl implements OrderService {
             orderAllAmount = BigDecimalUtil.add(
                     orderAllAmount.doubleValue(),
                     BigDecimalUtil.mul(
-                            productInfo.getProductPrice().doubleValue(),
+                            productInfoOutput.getProductPrice().doubleValue(),
                             orderDetail.getProductQuantity().doubleValue()
                     ).doubleValue()
             );
 
             // 3.订单详情入库
-            BeanUtils.copyProperties(productInfo, orderDetail);
+            BeanUtils.copyProperties(productInfoOutput, orderDetail);
 
             orderDetail.setDetailId(KeyUtil.getUniqueKey());
             orderDetail.setOrderId(orderId);
@@ -83,12 +83,12 @@ public class OrderServiceImpl implements OrderService {
 
         // 5.扣库存 (就算多个商品也只会调用一次)
         // lambda表达式
-        List<CartDTO> cartDTOList  = orderDTO.getOrderDetailList().stream().map(
-                e -> new CartDTO(e.getProductId(),e.getProductQuantity())
+        List<DecreaseStockInput>   decreaseStockInputList = orderDTO.getOrderDetailList().stream().map(
+                e -> new DecreaseStockInput(e.getProductId(),e.getProductQuantity())
 
         ).collect(Collectors.toList());
 
-        productClient.decreaseStock(cartDTOList);
+        productClient.decreaseStock(decreaseStockInputList);
 
 
         return orderDTO;
