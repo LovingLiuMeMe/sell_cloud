@@ -50,6 +50,17 @@
             <groupId>cn.lovingliu</groupId>
             <artifactId>product-client</artifactId>
         </dependency>
+        <!-- spring-cloud-config 统一管理 -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-config-client</artifactId>
+        </dependency>
+
+        <!-- 微服务配置刷新广播-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-bus-amqp</artifactId>
+        </dependency>
     </dependencies>
     <build>
         <plugins>

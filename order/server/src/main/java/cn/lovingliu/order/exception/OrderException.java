@@ -12,12 +12,12 @@ import lombok.Data;
 public class OrderException extends RuntimeException {
     private Integer code;
 
-    public OrderException(Integer code,String msg){
+    public OrderException(Integer code, String msg) {
         super(msg);
         this.code = code;
     }
 
-    public OrderException(CommonStatusEnum commonStatusEnum){
+    public OrderException(CommonStatusEnum commonStatusEnum) {
         super(commonStatusEnum.getMsg());
         this.code = commonStatusEnum.getCode();
     }

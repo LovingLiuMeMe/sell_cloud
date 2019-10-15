@@ -1,40 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c1ed018c-8eca-486c-b6b7-83aa244a0923" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/order/order-client/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/order/order-common/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/order/order-server/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/order/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/order/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/order/src/main/java/cn/lovingliu/order/OrderApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/order/order-server/src/main/java/cn/lovingliu/order/OrderApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/order/src/main/java/cn/lovingliu/order/client/ProductClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/order/order-server/src/main/java/cn/lovingliu/order/client/ProductClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/order/src/main/java/cn/lovingliu/order/common/ServerResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/order/order-server/src/main/java/cn/lovingliu/order/common/ServerResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/order/src/main/java/cn/lovingliu/order/config/RestTemplateConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/order/order-server/src/main/java/cn/lovingliu/order/config/RestTemplateConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/order/src/main/java/cn/lovingliu/order/controller/OrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/order/order-server/src/main/java/cn/lovingliu/order/controller/OrderController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/order/src/main/java/cn/lovingliu/order/convert/OrderFormToOrderDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/order/order-server/src/main/java/cn/lovingliu/order/convert/OrderFormToOrderDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/order/src/main/java/cn/lovingliu/order/dataobject/OrderDetail.java" beforeDir="false" afterPath="$PROJECT_DIR$/order/order-server/src/main/java/cn/lovingliu/order/dataobject/OrderDetail.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/order/src/main/java/cn/lovingliu/order/dataobject/OrderMaster.java" beforeDir="false" afterPath="$PROJECT_DIR$/order/order-server/src/main/java/cn/lovingliu/order/dataobject/OrderMaster.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/order/src/main/java/cn/lovingliu/order/dataobject/ProductInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/order/order-server/src/main/java/cn/lovingliu/order/dataobject/ProductInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/order/src/main/java/cn/lovingliu/order/dto/CartDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/order/order-server/src/main/java/cn/lovingliu/order/dto/CartDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/order/src/main/java/cn/lovingliu/order/dto/OrderDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/order/order-server/src/main/java/cn/lovingliu/order/dto/OrderDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/order/src/main/java/cn/lovingliu/order/enums/CodeEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/order/order-server/src/main/java/cn/lovingliu/order/enums/CodeEnum.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/order/src/main/java/cn/lovingliu/order/enums/CommonStatusEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/order/order-server/src/main/java/cn/lovingliu/order/enums/CommonStatusEnum.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/order/src/main/java/cn/lovingliu/order/exception/OrderException.java" beforeDir="false" afterPath="$PROJECT_DIR$/order/order-server/src/main/java/cn/lovingliu/order/exception/OrderException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/order/src/main/java/cn/lovingliu/order/form/OrderForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/order/order-server/src/main/java/cn/lovingliu/order/form/OrderForm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/order/src/main/java/cn/lovingliu/order/handle/OrderExceptionHandle.java" beforeDir="false" afterPath="$PROJECT_DIR$/order/order-server/src/main/java/cn/lovingliu/order/handle/OrderExceptionHandle.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/order/src/main/java/cn/lovingliu/order/repositroy/OrderDetailRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/order/order-server/src/main/java/cn/lovingliu/order/repositroy/OrderDetailRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/order/src/main/java/cn/lovingliu/order/repositroy/OrderMasterRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/order/order-server/src/main/java/cn/lovingliu/order/repositroy/OrderMasterRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/order/src/main/java/cn/lovingliu/order/service/OrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/order/order-server/src/main/java/cn/lovingliu/order/service/OrderService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/order/src/main/java/cn/lovingliu/order/service/impl/OrderServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/order/order-server/src/main/java/cn/lovingliu/order/service/impl/OrderServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/order/src/main/java/cn/lovingliu/order/util/BigDecimalUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/order/order-server/src/main/java/cn/lovingliu/order/util/BigDecimalUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/order/src/main/java/cn/lovingliu/order/util/KeyUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/order/order-server/src/main/java/cn/lovingliu/order/util/KeyUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/order/src/main/java/cn/lovingliu/order/util/serializer/DateToLongSerializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/order/order-server/src/main/java/cn/lovingliu/order/util/serializer/DateToLongSerializer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/order/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/order/order-server/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/order/src/test/java/cn/lovingliu/order/OrderApplicationTests.java" beforeDir="false" />
+    <list default="true" id="e8aadd3a-f5fe-42a2-ab7c-f1570a29d38d" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sell_cloud.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eureka/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/eureka/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eureka/target/classes/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/eureka/target/classes/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/order/server/src/main/java/cn/lovingliu/order/config/RestTemplateConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/order/server/src/main/java/cn/lovingliu/order/config/RestTemplateConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/order/server/src/main/java/cn/lovingliu/order/controller/OrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/order/server/src/main/java/cn/lovingliu/order/controller/OrderController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/order/server/src/main/java/cn/lovingliu/order/convert/OrderFormToOrderDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/order/server/src/main/java/cn/lovingliu/order/convert/OrderFormToOrderDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/order/server/src/main/java/cn/lovingliu/order/enums/CommonStatusEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/order/server/src/main/java/cn/lovingliu/order/enums/CommonStatusEnum.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/order/server/src/main/java/cn/lovingliu/order/exception/OrderException.java" beforeDir="false" afterPath="$PROJECT_DIR$/order/server/src/main/java/cn/lovingliu/order/exception/OrderException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/order/server/src/main/java/cn/lovingliu/order/handle/OrderExceptionHandle.java" beforeDir="false" afterPath="$PROJECT_DIR$/order/server/src/main/java/cn/lovingliu/order/handle/OrderExceptionHandle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/order/server/src/main/java/cn/lovingliu/order/repositroy/OrderDetailRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/order/server/src/main/java/cn/lovingliu/order/repositroy/OrderDetailRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/order/server/src/main/java/cn/lovingliu/order/repositroy/OrderMasterRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/order/server/src/main/java/cn/lovingliu/order/repositroy/OrderMasterRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/order/server/src/main/java/cn/lovingliu/order/service/impl/OrderServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/order/server/src/main/java/cn/lovingliu/order/service/impl/OrderServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/order/server/src/main/java/cn/lovingliu/order/util/BigDecimalUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/order/server/src/main/java/cn/lovingliu/order/util/BigDecimalUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/order/server/src/main/java/cn/lovingliu/order/util/KeyUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/order/server/src/main/java/cn/lovingliu/order/util/KeyUtil.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/product/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/product/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/product/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/product/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/product/product-server/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/product/product-server/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/product/common/src/main/java/cn/lovingliu/product/common/ProductInfoOutput.java" beforeDir="false" afterPath="$PROJECT_DIR$/product/common/src/main/java/cn/lovingliu/product/common/ProductInfoOutput.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/product/server/src/main/java/cn/lovingliu/product/controller/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/product/server/src/main/java/cn/lovingliu/product/controller/ProductController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/product/server/src/main/java/cn/lovingliu/product/convert/ProductInfoToProductInfoVO.java" beforeDir="false" afterPath="$PROJECT_DIR$/product/server/src/main/java/cn/lovingliu/product/convert/ProductInfoToProductInfoVO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/product/server/src/main/java/cn/lovingliu/product/enums/CommonStatusEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/product/server/src/main/java/cn/lovingliu/product/enums/CommonStatusEnum.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/product/server/src/main/java/cn/lovingliu/product/exception/ProductException.java" beforeDir="false" afterPath="$PROJECT_DIR$/product/server/src/main/java/cn/lovingliu/product/exception/ProductException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/product/server/src/main/java/cn/lovingliu/product/repository/ProductCategoryRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/product/server/src/main/java/cn/lovingliu/product/repository/ProductCategoryRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/product/server/src/main/java/cn/lovingliu/product/repository/ProductInfoRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/product/server/src/main/java/cn/lovingliu/product/repository/ProductInfoRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/product/server/src/main/java/cn/lovingliu/product/service/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/product/server/src/main/java/cn/lovingliu/product/service/ProductService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/product/server/src/main/java/cn/lovingliu/product/service/impl/ProductServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/product/server/src/main/java/cn/lovingliu/product/service/impl/ProductServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/product/server/src/main/java/cn/lovingliu/product/util/CodeEnumUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/product/server/src/main/java/cn/lovingliu/product/util/CodeEnumUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/product/server/src/main/java/cn/lovingliu/product/util/DateTimeUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/product/server/src/main/java/cn/lovingliu/product/util/DateTimeUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/product/server/src/main/java/cn/lovingliu/product/vo/ProductCategoryVO.java" beforeDir="false" afterPath="$PROJECT_DIR$/product/server/src/main/java/cn/lovingliu/product/vo/ProductCategoryVO.java" afterDir="false" />
     </list>
+    <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,9 +65,10 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
+    <option name="x" value="67" />
     <option name="y" value="23" />
     <option name="width" value="1280" />
-    <option name="height" value="729" />
+    <option name="height" value="732" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -76,24 +76,14 @@
     </navigator>
     <panes>
       <pane id="PackagesPane" />
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="sell_cloud" type="b2602c69:ProjectViewProjectNode" />
-              <item name="sell_cloud" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
+      <pane id="ProjectPane" />
       <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="SDKs" />
@@ -118,20 +108,20 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="c1ed018c-8eca-486c-b6b7-83aa244a0923" name="Default Changelist" comment="" />
-      <created>1571026065481</created>
+      <changelist id="e8aadd3a-f5fe-42a2-ab7c-f1570a29d38d" name="Default Changelist" comment="" />
+      <created>1571065119205</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1571026065481</updated>
-      <workItem from="1571026067448" duration="11000" />
+      <updated>1571065119205</updated>
+      <workItem from="1571065169000" duration="5000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="11000" />
+    <option name="totallyTimeSpent" value="5000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1280" height="729" extended-state="0" />
+    <frame x="67" y="23" width="1280" height="732" extended-state="0" />
     <layout>
       <window_info id="Image Layers" />
       <window_info id="Designer" />

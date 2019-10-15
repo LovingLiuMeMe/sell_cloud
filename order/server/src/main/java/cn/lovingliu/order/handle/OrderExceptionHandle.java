@@ -17,12 +17,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class OrderExceptionHandle {
     @ExceptionHandler(OrderException.class)
     @ResponseBody
-    public ServerResponse resolveOrderException(Exception e){
-        if(e instanceof OrderException){
+    public ServerResponse resolveOrderException(Exception e) {
+        if (e instanceof OrderException) {
             OrderException orderException = (OrderException) e;
-            log.error("【统一异常处理】=> {}",e.getMessage());
-            return  ServerResponse.createByErrorCodeMessage(orderException.getCode(),orderException.getMessage());
+            log.error("【统一异常处理】=> {}", e.getMessage());
+            return ServerResponse.createByErrorCodeMessage(orderException.getCode(), orderException.getMessage());
         }
-        return  ServerResponse.createByErrorMessage(e.getMessage());
+        return ServerResponse.createByErrorMessage(e.getMessage());
     }
 }

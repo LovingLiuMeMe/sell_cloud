@@ -7,6 +7,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @SpringBootApplication
 @EnableDiscoveryClient
+// 设置扫描包的位置 ProductClient 才可以@Autowired
 @EnableFeignClients(basePackages = "cn.lovingliu.product.client")
 public class OrderApplication {
 

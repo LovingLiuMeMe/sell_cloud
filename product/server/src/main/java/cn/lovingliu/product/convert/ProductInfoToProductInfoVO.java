@@ -16,7 +16,7 @@ import java.util.List;
  * @Date：Created in 2019-10-11
  */
 public class ProductInfoToProductInfoVO {
-    public static ProductInfoVO convert(ProductInfo productInfo){
+    public static ProductInfoVO convert(ProductInfo productInfo) {
         ProductInfoVO productInfoVO = new ProductInfoVO();
         BeanUtils.copyProperties(productInfo, productInfoVO);
 
@@ -27,9 +27,10 @@ public class ProductInfoToProductInfoVO {
 
         return productInfoVO;
     }
-    public static List<ProductInfoVO> convert(List<ProductInfo> productInfoList){
+
+    public static List<ProductInfoVO> convert(List<ProductInfo> productInfoList) {
         List<ProductInfoVO> list = Lists.newArrayList();
-        for(ProductInfo productInfo: productInfoList){
+        for (ProductInfo productInfo : productInfoList) {
             list.add(convert(productInfo));
         }
         return list;

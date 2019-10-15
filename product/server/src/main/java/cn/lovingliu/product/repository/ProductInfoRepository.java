@@ -14,7 +14,8 @@ import java.util.List;
  * @Date：Created in 2019-10-11
  */
 @Repository
-public interface ProductInfoRepository extends JpaRepository<ProductInfo,String> {
+public interface ProductInfoRepository extends JpaRepository<ProductInfo, String> {
     Page<ProductInfo> findByProductStatus(Integer productStatus, Pageable pageable);
+
     List<ProductInfo> findByProductIdIn(List<String> productIdList);
 }

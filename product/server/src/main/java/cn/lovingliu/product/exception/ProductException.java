@@ -10,12 +10,12 @@ import cn.lovingliu.product.enums.CommonStatusEnum;
 public class ProductException extends RuntimeException {
     private Integer code;
 
-    public ProductException(Integer code,String msg){
+    public ProductException(Integer code, String msg) {
         super(msg);
         this.code = code;
     }
 
-    public ProductException(CommonStatusEnum commonStatusEnum){
+    public ProductException(CommonStatusEnum commonStatusEnum) {
         super(commonStatusEnum.getMsg());
         this.code = commonStatusEnum.getCode();
     }

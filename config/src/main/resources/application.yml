@@ -1,0 +1,32 @@
+spring:
+  application:
+    name: config
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/LovingLiuMeMe/config-repo
+          username: lovingliu@126.com
+          password: liubo1995828
+          basedir: /Users/lovingliu/Desktop/project/sell_cloud/sell_cloud/config/basedir
+    # 消息总线
+    bus:
+      enabled: true
+      trace:
+        enabled: true
+  # rabbitMq 的配置 (下面是默认参数,参数一致可不写)
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: guest
+    password: guest
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:4321/eureka
+management:
+  # 暴露bus-refresh
+  endpoints:
+    web:
+      exposure:
+        include: "*"

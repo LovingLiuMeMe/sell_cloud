@@ -23,6 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
+
 /**
  * @Author：LovingLiu
  * @Description:
@@ -39,7 +40,7 @@ public class OrderServiceImpl implements OrderService {
     private ProductClient productClient;
 
     @Override
-    @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.READ_COMMITTED)
+    @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED)
     public OrderDTO createrOrder(OrderDTO orderDTO) {
         BigDecimal orderAllAmount = new BigDecimal("0");
 
@@ -48,7 +49,7 @@ public class OrderServiceImpl implements OrderService {
         for (OrderDetail orderDetail : orderDTO.getOrderDetailList()) {
             // 1.查询商品详情(调用商品的服务)
 
-             ProductInfoOutput productInfoOutput = productClient.findById(orderDetail.getProductId());
+            ProductInfoOutput productInfoOutput = productClient.findById(orderDetail.getProductId());
 
             if (productInfoOutput == null) {
                 throw new OrderException(CommonStatusEnum.ERROR);
@@ -83,8 +84,8 @@ public class OrderServiceImpl implements OrderService {
 
         // 5.扣库存 (就算多个商品也只会调用一次)
         // lambda表达式
-        List<DecreaseStockInput>   decreaseStockInputList = orderDTO.getOrderDetailList().stream().map(
-                e -> new DecreaseStockInput(e.getProductId(),e.getProductQuantity())
+        List<DecreaseStockInput> decreaseStockInputList = orderDTO.getOrderDetailList().stream().map(
+                e -> new DecreaseStockInput(e.getProductId(), e.getProductQuantity())
 
         ).collect(Collectors.toList());
 

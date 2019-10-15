@@ -33,21 +33,21 @@ public class OrderController {
     private OrderService orderService;
 
     @PostMapping("create")
-    public ServerResponse<Map<String,String>> create(@Valid OrderForm orderForm, BindingResult bindingResult){
-        if(bindingResult.hasErrors()){
-            log.error("参数不正确,参数不正确{}",orderForm);
-            throw new OrderException(CommonStatusEnum.PARAMS_ERROR.getCode(),bindingResult.getFieldError().getDefaultMessage());
+    public ServerResponse<Map<String, String>> create(@Valid OrderForm orderForm, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            log.error("参数不正确,参数不正确{}", orderForm);
+            throw new OrderException(CommonStatusEnum.PARAMS_ERROR.getCode(), bindingResult.getFieldError().getDefaultMessage());
         }
 
         OrderDTO orderDTO = OrderFormToOrderDTO.convert(orderForm);
-        if(CollectionUtils.isEmpty(orderDTO.getOrderDetailList())){
+        if (CollectionUtils.isEmpty(orderDTO.getOrderDetailList())) {
             log.error("【创建订单购物车不能为空】");
             throw new OrderException(CommonStatusEnum.CART_EMPTY);
         }
 
         OrderDTO resultDto = orderService.createrOrder(orderDTO);
-        Map<String,String> resultMap = new HashMap<>();
-        resultMap.put("orderId",resultDto.getOrderId());
+        Map<String, String> resultMap = new HashMap<>();
+        resultMap.put("orderId", resultDto.getOrderId());
         return ServerResponse.createBySuccess(resultMap);
     }
 }

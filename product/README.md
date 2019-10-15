@@ -1,4 +1,4 @@
-## 模块华改造
+## 模块化改造
 1.为什么要进行改造（目前项目存在的问题）
 ```java
 首先,此时 已经实现了 订单服务调用商品服务的接口,实现了下单,但是存在以下问题
@@ -76,8 +76,12 @@ public interface ProductClient {
     ProductInfoOutput findById(@PathVariable("id") String id);
 }
 ```
-2.自己维护自己的入参类（保证服务的完整性）
+3.自己维护自己的入参类（保证服务的完整性）
 
-### jar包打包
-在product服务中,自己维护了`ProductInfoOutput`和`DecreaseStockInput`两个参数类
-mvn -Dmaven.test.skip=true -U clean install 
+**jar包打包**  
+在product服务中,自己维护了`ProductInfoOutput`和`DecreaseStockInput`两个参数类  
+但是在 order服务再定义一次product服务的参数类增加了系统耦合程度,所以应该发布到仓库中，使得order服务 可以使用maven直接使用。
+```java
+mvn -Dmaven.test.skip=true -U clean install  由于是在本机 所有使用 mvn install 即可打包且安装到本地maven仓库  
+```
+

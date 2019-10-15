@@ -10,6 +10,6 @@ import org.springframework.stereotype.Repository;
  * @Date：Created in 2019-10-11
  */
 @Repository
-public interface OrderMasterRepository extends JpaRepository<OrderMaster,String> {
+public interface OrderMasterRepository extends JpaRepository<OrderMaster, String> {
 
 }

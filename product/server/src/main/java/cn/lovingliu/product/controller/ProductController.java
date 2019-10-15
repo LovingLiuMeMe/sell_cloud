@@ -34,16 +34,16 @@ public class ProductController {
     private ProductCategoryService productCategoryService;
 
     @GetMapping("/list")
-    public ServerResponse<List<ProductCategoryVO>> list(@RequestParam(value = "pageNum",defaultValue = "1")Integer pageNum,
-                                                        @RequestParam(value = "pageSize",defaultValue = "10") Integer pageSize,
-                                                        @RequestParam(value = "sortBy",defaultValue = "productPrice")String sortBy,
-                                                        @RequestParam(value = "sortLift",defaultValue = "desc")String sortLift){
+    public ServerResponse<List<ProductCategoryVO>> list(@RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
+                                                        @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize,
+                                                        @RequestParam(value = "sortBy", defaultValue = "productPrice") String sortBy,
+                                                        @RequestParam(value = "sortLift", defaultValue = "desc") String sortLift) {
 
         // 1.更具条件查询所有的商品
-        Sort sort = new Sort(sortLift.equals("desc")? Sort.Direction.DESC : Sort.Direction.ASC,sortBy);
+        Sort sort = new Sort(sortLift.equals("desc") ? Sort.Direction.DESC : Sort.Direction.ASC, sortBy);
 
-        PageRequest pageRequest = PageRequest.of(pageNum-1,pageSize,sort);
-        Page<ProductInfo> page = productService.findUpAll(CommonStatusEnum.UP.getCode(),pageRequest);
+        PageRequest pageRequest = PageRequest.of(pageNum - 1, pageSize, sort);
+        Page<ProductInfo> page = productService.findUpAll(CommonStatusEnum.UP.getCode(), pageRequest);
         List<ProductInfo> productInfoList = page.getContent();
         // 2.查询出上述商品中的分类(一次查询:只进行一次查询 即可拿出所有信息)
         // java8 lambda表达式
@@ -55,7 +55,7 @@ public class ProductController {
         List<ProductCategory> productCategoryList = productCategoryService.findByCategoryTypeInIdList(categorytypeList);
         // 3.数据封装
         List<ProductCategoryVO> productCategoryVOList = Lists.newArrayList();
-        for(ProductCategory productCategory:productCategoryList){
+        for (ProductCategory productCategory : productCategoryList) {
             ProductCategoryVO productCategoryVO = new ProductCategoryVO();
             productCategoryVO.setCategoryName(productCategory.getCategoryName());
             productCategoryVO.setCategoryType(productCategory.getCategoryType());
@@ -65,26 +65,26 @@ public class ProductController {
             productCategoryVO.setProductInfoVOList(productInfoVOList);
             productCategoryVOList.add(productCategoryVO);
         }
-        return ServerResponse.createBySuccess("成功",productCategoryVOList);
+        return ServerResponse.createBySuccess("成功", productCategoryVOList);
     }
 
     /**
      * @Desc 获取商品列表(cloud 给订单服务使用的)
      * @Author LovingLiu
-    */
+     */
     @PostMapping("/listForOrder")
-    public List<ProductInfo> listForOrder(@RequestBody List<String> productIdList){
+    public List<ProductInfo> listForOrder(@RequestBody List<String> productIdList) {
         return productService.findList(productIdList);
     }
 
     @PostMapping("/decreaseStock")
-    public String decreaseStock(@RequestBody List<DecreaseStockInput> decreaseStockInputList){
+    public String decreaseStock(@RequestBody List<DecreaseStockInput> decreaseStockInputList) {
         productService.decreaseStock(decreaseStockInputList);
         return "success";
     }
 
     @GetMapping("/info/{id}")
-    public ProductInfo findById(@PathVariable("id") String id){
+    public ProductInfo findById(@PathVariable("id") String id) {
         return productService.findById(id);
     }
 }

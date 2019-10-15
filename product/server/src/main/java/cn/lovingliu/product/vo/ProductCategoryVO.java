@@ -14,7 +14,7 @@ import java.util.List;
 public class ProductCategoryVO {
 
     @JsonProperty("name")
-    private String  categoryName;//类目名称
+    private String categoryName;//类目名称
     @JsonProperty("type")
     private Integer categoryType;//类目编号
     @JsonProperty("foods")

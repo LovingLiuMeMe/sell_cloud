@@ -30,7 +30,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Page<ProductInfo> findUpAll(Integer productStatus, Pageable pageable) {
-        Page page = productInfoRepository.findByProductStatus(CommonStatusEnum.UP.getCode(),pageable);
+        Page page = productInfoRepository.findByProductStatus(CommonStatusEnum.UP.getCode(), pageable);
         return page;
     }
 
@@ -40,12 +40,12 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.REPEATABLE_READ)
+    @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.REPEATABLE_READ)
     public void decreaseStock(List<DecreaseStockInput> decreaseStockInputList) {
-        for (DecreaseStockInput decreaseStockInput: decreaseStockInputList) {
+        for (DecreaseStockInput decreaseStockInput : decreaseStockInputList) {
             ProductInfo productInfo = productInfoRepository.findById(decreaseStockInput.getProductId()).orElse(null);
 
-            if (productInfo == null){
+            if (productInfo == null) {
                 throw new ProductException(CommonStatusEnum.PRODUCT_NOT_EXIT);
             }
             Integer resultStock = productInfo.getProductStock() - decreaseStockInput.getProductQuantity();
@@ -54,7 +54,7 @@ public class ProductServiceImpl implements ProductService {
              * 假设此时有两个线程同时进入这里，库存10件，且都买9件，此时就会出现超卖。卖出的数量超过库存
              * @Author LovingLiu
              */
-            if(resultStock < 0){
+            if (resultStock < 0) {
                 throw new ProductException(CommonStatusEnum.PRODUCT_STOCK_ERROR);
             }
             productInfo.setProductStock(resultStock);
@@ -65,7 +65,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ProductInfo findById(String id) {
         Optional<ProductInfo> optional = productInfoRepository.findById(id);
-        if(!optional.isPresent()){
+        if (!optional.isPresent()) {
             throw new ProductException(CommonStatusEnum.PRODUCT_NOT_EXIT);
         }
         return optional.get();
