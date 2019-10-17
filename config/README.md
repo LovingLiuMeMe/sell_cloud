@@ -18,6 +18,7 @@ label:分支（默认master）
 ### Docker RabbitMQ 
 ```
 docker run -d --name myrabbit -p 5672:5672 -p 15672:15672 rabbitmq:3.8.0-management
+docker run -d -p 6379:6379 redis:4.0.8
 ```
 
 1.停止所有的container，这样才能够删除其中的images：

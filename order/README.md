@@ -136,4 +136,152 @@ public class EnvTestController {
     }
 }
 ```
+### 4.spring-cloud-stream-rabbit
+应用程序通过 input（相当于 consumer）、output（相当于 producer）来与 Spring Cloud Stream 中 Binder 交互，而 Binder 负责与消息中间件交互；  
+因此，我们只需关注如何与 Binder 交互即可，而无需关注与具体消息中间件的交互。
+#### 创建生产者
+1.添加依赖
+```xml
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-stream-rabbit</artifactId>
+</dependency>
+```
+2.定义配置文件
+```xml
+spring:
+  cloud:
+    stream:
+      binders:
+        test:
+          type: rabbit
+          environment:
+            spring:
+              rabbitmq:
+                addresses: 10.0.20.132
+                port: 5672
+                username: root
+                password: root
+                virtual-host: /unicode-pay
+      bindings:
+        testOutPut:
+          destination: testRabbit
+          content-type: application/json
+          default-binder: test
+```
+```
+现在来解释一下这些配置的含义
 
+binders： 这是一组binder的集合，这里配置了一个名为test的binder，这个binder中是包含了一个rabbit的连接信息
+bindings：这是一组binding的集合，这里配置了一个名为testOutPut的binding，这个binding中配置了指向名test的binder下的一个交换机testRabbit。
+扩展： 如果我们项目中不仅集成了rabbit还集成了kafka那么就可以新增一个类型为kafka的binder、如果项目中会使用多个交换机那么就使用多个binding，
+```
+3.创建通道
+```java
+public interface  MqMessageSource {
+
+    String TEST_OUT_PUT = "testOutPut";
+
+    @Output(TEST_OUT_PUT)
+    MessageChannel testOutPut();
+
+}
+```
+4.发送消息
+```java
+@EnableBinding(MqMessageSource.class)
+public class MqMessageProducer {
+    @Autowired
+    @Output(MqMessageSource.TEST_OUT_PUT)
+    private MessageChannel channel;
+
+
+    public void sendMsg(String msg) {
+        channel.send(MessageBuilder.withPayload(msg).build());
+        System.err.println("消息发送成功："+msg);
+    }
+}
+```
+这里就是使用上方的通道来发送到指定的交换机了。需要注意的是withPayload方法你可以传入任何类型的对象，但是需要实现序列化接口  
+5.创建测试接口    
+EnableBinding注解绑定的类默认是被Spring管理的，我们可以在controller中注入它
+```java
+@Autowired
+private MqMessageProducer mqMessageProducer;
+
+@GetMapping(value = "/testMq")
+public String testMq(@RequestParam("msg")String msg){
+    mqMessageProducer.sendMsg(msg);
+    return "发送成功";
+}
+```
+生产者的代码到此已经完成了。
+#### 创建消费者
+1. 引入依赖
+```xml
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-stream-rabbit</artifactId>
+</dependency>
+```
+2.定义配置文件
+```xml
+spring:
+  cloud:
+    stream:
+      binders:
+        test:
+          type: rabbit
+          environment:
+            spring:
+              rabbitmq:
+                addresses: 10.0.20.132
+                port: 5672
+                username: root
+                password: root
+                virtual-host: /unicode-pay
+      bindings:
+        testInPut:
+          group: order
+          destination: testRabbit
+          content-type: application/json
+          default-binder: test
+```
+这里与生产者唯一不同的地方就是testIntPut了，相信你已经明白了，它是binding的名字，也是通道与交换机绑定的关键  
+注意: `group: order` 是的多个消费者 消费同一个queue下的消息,而不是各自维护一个  
+```
+如:不使用group: order 之前
+Queue order-output.anonymous.DTMaZ5F6TJGhRKGbcVRu8Q
+    -> exchange: order-output
+    -> routing key: #
+Queue order-output.anonymous.dGPeoKsGRZC2o1YKC4bEBw
+    -> exchange: order-output
+    -> routing key: #
+
+添加group: order 之后
+
+    
+```
+3.创建通道  
+```java
+public interface  MqMessageSource {
+
+    String TEST_IN_PUT = "testInPut";
+
+    @Input(TEST_IN_PUT)
+    SubscribableChannel testInPut();
+
+}
+```
+4.接受消息
+```java
+@EnableBinding(MqMessageSource.class)
+public class MqMessageConsumer {
+    @StreamListener(MqMessageSource.TEST_IN_PUT)
+    public void messageInPut(Message<String> message) {
+        System.err.println(" 消息接收成功：" + message.getPayload());
+    }
+
+}
+```
+这个时候启动Eureka、消息生产者和消费者，然后调用生产者的接口应该就可以接受到来自mq的消息了。

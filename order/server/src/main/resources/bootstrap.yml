@@ -8,14 +8,35 @@ spring:
         enabled: true
         service-id: CONFIG #应用名称
       profile: dev
-  #配置信息更新 广播（消息队列）
-  rabbitmq:
-    host: 127.0.0.1
-    port: 5672
-    username: guest
-    password: guest
+  # 集成spring-cloud-stream-rabbit
+    stream:
+      binders:
+        myrabbit: # 自定义binder
+          type: rabbit
+          environment:
+            spring:
+              rabbitmq:
+                addresses: 127.0.0.1
+                port: 5672
+                username: guest
+                password: guest
+                virtual-host: /
+      # MqReceiver 中的 key = "${rabbitmq.consumer.routing-key}" 会影响
+      bindings:
+        myInput:
+          group: order
+          destination: order-output #exchange
+          content-type: application/json #messasge存储的格式
+          default-binder: myrabbit
 # eureka 必须单独提取出来（启动在8761默认端口就不用）
 eureka:
   client:
     service-url:
       defaultZone: http://localhost:4321/eureka
+
+# 消息队列中的 消费消息
+rabbitmq:
+  consumer:
+    queue: order-queue
+    exchange: order-exchange
+    routing-key: order.#
