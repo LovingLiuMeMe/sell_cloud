@@ -33,7 +33,9 @@ eureka:
   client:
     service-url:
       defaultZone: http://localhost:4321/eureka
-
+  instance:
+    instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}:${spring.application.instance_id:${server.port}}
+    prefer-ip-address: true
 # 消息队列中的 消费消息
 rabbitmq:
   consumer:

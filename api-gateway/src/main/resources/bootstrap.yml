@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: api-gateway
+  # 统一配置文件管理 并不需要添加其他注解
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        service-id: CONFIG #应用名称
+      profile: dev
+# eureka 必须单独提取出来（启动在8761默认端口就不用）
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:4321/eureka
+  instance:
+    instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}:${spring.application.instance_id:${server.port}}
+    prefer-ip-address: true
+ribbon:
+  ReadTimeout: 60000
+  ConnectTimeout: 60000
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 60000
