@@ -16,6 +16,7 @@ eureka:
   instance:
     instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}:${spring.application.instance_id:${server.port}}
     prefer-ip-address: true
+# 解决类的懒加载 导致访问超时
 ribbon:
   ReadTimeout: 60000
   ConnectTimeout: 60000
