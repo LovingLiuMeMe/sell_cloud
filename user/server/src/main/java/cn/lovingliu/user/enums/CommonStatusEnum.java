@@ -1,4 +1,4 @@
-package cn.lovingliu.order.enums;
+package cn.lovingliu.user.enums;
 
 /**
  * @Author：LovingLiu
@@ -6,18 +6,12 @@ package cn.lovingliu.order.enums;
  * @Date：Created in 2019-10-11
  */
 public enum CommonStatusEnum implements CodeEnum {
-    UP(0, "上架"),
-    PARAMS_ERROR(100, "参数错误"),
-    CART_EMPTY(101, "购物车为空"),
-    ORDER_NOT_EXIT(102,"订单不存在"),
-    ORDER_NOT_DETAIL_EXIT(103,"订单不存在"),
-    ORDER_STATUS_ERROR(104,"订单状态错误"),
-    ORDER_FINISGHED(1,"已完成"),
-    ORDER_CANCEL(2, "已取消"),
     SUCCESS(200, "成功"),
     ERROR(400, "失败"),
-    NEW_ORDER(0, "新的订单"),
-    WAIT_PAY(0, "待支付");
+    LOGIN_FAIL(600,"登录失败"),
+    BUYER(0,"买家"),
+    SELLER(1,"卖家"),
+    ROLE_ERROR(601,"角色权限限制");
 
     private final Integer code;
     private final String msg;

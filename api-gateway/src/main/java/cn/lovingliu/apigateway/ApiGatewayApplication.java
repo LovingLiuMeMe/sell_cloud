@@ -22,5 +22,4 @@ public class ApiGatewayApplication {
     public ZuulProperties zuulProperties() {
         return new ZuulProperties();
     }
-
 }

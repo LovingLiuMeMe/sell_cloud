@@ -19,9 +19,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -92,6 +94,36 @@ public class OrderServiceImpl implements OrderService {
         productClient.decreaseStock(decreaseStockInputList);
 
 
+        return orderDTO;
+    }
+    /**
+     * @Desc 完结订单 只能卖家来操作
+     * @Author LovingLiu
+    */
+    @Transactional
+    public OrderDTO finish(String orderId){
+        // 1.查询订单
+        Optional<OrderMaster> orderMasterOptional = orderMasterRepository.findById(orderId);
+        if(!orderMasterOptional.isPresent()){
+            throw new OrderException(CommonStatusEnum.ORDER_NOT_EXIT);
+        }
+        OrderMaster orderMaster = orderMasterOptional.get();
+        // 2.判断订单状态
+        if(orderMaster.getOrderStatus() != CommonStatusEnum.NEW_ORDER.getCode()){
+            throw new OrderException(CommonStatusEnum.ORDER_STATUS_ERROR);
+        }
+        // 3.修改订单状态
+        orderMaster.setOrderStatus(CommonStatusEnum.ORDER_FINISGHED.getCode());
+        // 4.更新数据库
+        OrderMaster result = orderMasterRepository.save(orderMaster);
+        // 5.构造OrderDTO对象
+        List<OrderDetail> orderDetailList = orderDetailRepository.findByOrderId(orderId);
+        if(CollectionUtils.isEmpty(orderDetailList)){
+            throw new OrderException(CommonStatusEnum.ORDER_NOT_DETAIL_EXIT);
+        }
+        OrderDTO orderDTO = new OrderDTO();
+        BeanUtils.copyProperties(result,orderDTO);
+        orderDTO.setOrderDetailList(orderDetailList);
         return orderDTO;
     }
 }

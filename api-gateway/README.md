@@ -258,3 +258,111 @@ public class ApiGatewayApplication {
 
 }
 ```
+### 5.实现前置过滤器和后置过滤器
+TokenFilter 前置过滤器
+```java
+package cn.lovingliu.apigateway.filter;
+
+import com.netflix.zuul.ZuulFilter;
+import com.netflix.zuul.context.RequestContext;
+import com.netflix.zuul.exception.ZuulException;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang.StringUtils;
+import org.springframework.cloud.netflix.zuul.filters.support.FilterConstants;
+import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Component;
+
+import javax.servlet.http.HttpServletRequest;
+
+/**
+ * @Author：LovingLiu
+ * @Description: zuul 前置过滤器
+ * @Date：Created in 2019-10-18
+ */
+@Component
+@Slf4j
+public class TokenFilter extends ZuulFilter {
+    @Override
+    public String filterType() {
+        return FilterConstants.PRE_TYPE;
+    }
+
+    @Override
+    public int filterOrder() {
+        return FilterConstants.PRE_DECORATION_FILTER_ORDER - 1;
+    }
+
+    @Override
+    public boolean shouldFilter() {
+        return true;
+    }
+
+    @Override
+    public Object run() throws ZuulException {
+        RequestContext requestContext = RequestContext.getCurrentContext();
+        HttpServletRequest request = requestContext.getRequest();
+        // 这里是从URL参数里获取,也可以从cookie和header中获取
+        String token = request.getParameter("token");
+        if(StringUtils.isBlank(token)){
+            log.error("验证未通过,token参数缺失");
+            requestContext.setSendZuulResponse(false);
+            requestContext.setResponseStatusCode(HttpStatus.UNAUTHORIZED.value());// 401
+        }
+        return null;
+    }
+}
+
+```
+AddResponseHeaderFilter（后置过滤器）
+```java
+package cn.lovingliu.apigateway.filter;
+
+/**
+ * @Author：LovingLiu
+ * @Description: 后置过滤器 封装响应
+ * @Date：Created in 2019-10-18
+ */
+
+import com.netflix.zuul.ZuulFilter;
+import com.netflix.zuul.context.RequestContext;
+import com.netflix.zuul.exception.ZuulException;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.cloud.netflix.zuul.filters.support.FilterConstants;
+import org.springframework.stereotype.Component;
+
+import javax.servlet.http.HttpServletResponse;
+import java.util.UUID;
+@Component
+@Slf4j
+public class AddResponseHeaderFilter extends ZuulFilter {
+    @Override
+    public String filterType() {
+        return FilterConstants.POST_TYPE;
+    }
+
+    @Override
+    public int filterOrder() {
+        return FilterConstants.SEND_RESPONSE_FILTER_ORDER - 1;
+    }
+
+    @Override
+    public boolean shouldFilter() {
+        return true;
+    }
+
+    @Override
+    public Object run() throws ZuulException {
+        RequestContext requestContext = RequestContext.getCurrentContext();
+        HttpServletResponse response = requestContext.getResponse();
+        response.setHeader("X-Foo", UUID.randomUUID().toString());
+        return null;
+    }
+}
+```
+### 6.异常处理
+### 7.Zuul限流
+### 8.Zuul跨域
+js ajax是有同源策略的  
+1.在传统的Spring项目中可以在**类**或者**方法**上,使用注解`@CrossOrigin`注解  
+2.在Zuul里面增加CorsFilter过滤器
+

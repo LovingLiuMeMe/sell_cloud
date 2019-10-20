@@ -9,4 +9,5 @@ import cn.lovingliu.order.dto.OrderDTO;
  */
 public interface OrderService {
     OrderDTO createrOrder(OrderDTO orderDTO);
+    OrderDTO finish(String orderId);
 }

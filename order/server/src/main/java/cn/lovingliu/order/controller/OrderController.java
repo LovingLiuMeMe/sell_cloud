@@ -13,6 +13,7 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
@@ -50,4 +51,10 @@ public class OrderController {
         resultMap.put("orderId", resultDto.getOrderId());
         return ServerResponse.createBySuccess(resultMap);
     }
+
+    @PostMapping("/finish")
+    public ServerResponse<OrderDTO> finish(@RequestParam("orderId") String orderId){
+        return ServerResponse.createBySuccess(orderService.finish(orderId));
+    }
 }
+
