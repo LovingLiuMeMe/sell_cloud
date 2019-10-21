@@ -28,6 +28,19 @@ spring:
           destination: order-output #exchange
           content-type: application/json #messasge存储的格式
           default-binder: myrabbit
+
+  # 链路追踪可视化 spring.zipkin.base-url
+  #重点
+  zipkin:
+    #base-url:当你设置sleuth-cli收集信息后通过http传输到zinkin-server时，需要在这里配置
+    base-url: http://127.0.0.1:9411
+    sender:
+      type: web
+  sleuth:
+    sampler:
+      #收集追踪信息的比率，如果是0.1则表示只记录10%的追踪数据，如果要全部追踪，设置为1（实际场景不推荐，因为会造成不小的性能消耗）
+      probability: 1
+
 # eureka 必须单独提取出来（启动在8761默认端口就不用）
 eureka:
   client:
@@ -43,3 +56,8 @@ rabbitmq:
     exchange: order-exchange
     routing-key: order.#
 # 可视化 默认是applicationName
+
+# 更改日志级别 方便链路追踪
+logging:
+  level:
+    org.springframework.cloud.openfeign: debug
