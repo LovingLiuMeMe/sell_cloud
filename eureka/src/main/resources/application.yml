@@ -3,12 +3,11 @@ eureka:
     fetch-registry: false
     register-with-eureka: false
     service-url:
-      defaultZone: http://localhost:4321/eureka
+      defaultZone: http://127.0.0.1:4321/eureka
   server: #自我保护模式关闭 在注册中心会一直提示 很烦
     enable-self-preservation: false
   instance: #使用主机的IP地址来定义注册中心的地址
     prefer-ip-address: true
-
 spring:
   application:
     name: eureka
